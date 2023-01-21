@@ -23,11 +23,8 @@ export class News extends Component {
   }
   
   handlePrevClick = async () => {
-    console.log("previous");
-    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=52618249e0b742ba91e874d5e3498413&page=${
-      this.state.page - 1
-    }&pageSize=12`;
-    let data = await fetch(url);
+    const page = this.state.page > 0 ? this.state.page -1: 0;
+    let data = await fetchNews(page);
     let parsedData = await data.json();
     console.log(parsedData);
 
@@ -37,12 +34,8 @@ export class News extends Component {
     });
   };
   handleNextClick = async () => {
-    console.log("next");
-
-    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=52618249e0b742ba91e874d5e3498413&page=${
-      this.state.page + 1
-    }&pageSize=12`;
-    let data = await fetch(url);
+    const page = this.state.page + 1;
+    let data = await fetchNews(page);
     let parsedData = await data.json();
     console.log(parsedData);
 
